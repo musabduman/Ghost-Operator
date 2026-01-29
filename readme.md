@@ -1,23 +1,23 @@
-# 🧠 AI Command Center: Bilgisayarını Chat ile Yönet
+# 👻 Ghost Operator
 
-> **"Tek sınır, hayal gücünüz."**
+> **"Görünmez ol. Her şeyi kontrol et. TEK SINIR HAYAL GÜCÜN."**
 
-Bu proje, sıradan bir botu değildir. Bilgisayarınızda çalışan yerel bir LLM (Ollama) ile Telegram'ı birbirine bağlayan, doğal dilden anlayan bir **Otomasyon Merkezidir**.
+Ghost Operator, bilgisayarınızı Telegram üzerinden tamamen uzaktan yönetmenizi sağlayan, **Ollama (Yerel LLM)** destekli, yeni nesil bir komut merkezidir.
 
-Siz Telegram'dan **"Bana THYAO hissesini yorumla"** dersiniz, yapay zeka bunu anlar, ilgili Python scriptini (`hisse.py`) bulur, çalıştırır ve sonucu size geri döner.
+Siz dışarıdayken bilgisayarınız evde "hayalet" modunda çalışır. Telegram'dan tek bir mesaj atarak scriptleri çalıştırabilir, sistem durumunu sorgulayabilir veya yapay zeka ile sohbet edebilirsiniz.
 
-## 🌟 Neler Yapabilir? (Şimdilik)
-Sistemin yetenekleri, `scriptler` klasörüne atacağınız dosyalara bağlıdır. Şu an yüklü modüller:
+## 💀 Yetenekler
 
-* **📈 Borsa Analizi:** "Ereğli hissesi ne durumda?" dediğinizde teknik ve temel analiz yapar.
-* **🐍 Python Testi:** "Ekrana Ahmet yazdır" dediğinizde basit test scriptlerini çalıştırır.
-* **🚀 Gelecek Potansiyeli:** Bilgisayarı kapatma, mail atma, dosya yedekleme... Sadece yeni bir script ekleyin ve yapay zekaya ne yapması gerektiğini söyleyin.
+* **⚡ Uzaktan İnfaz (Remote Execution):** Python scriptlerini veya sistem komutlarını uzaktan tetikleyin.
+* **🧠 Hayalet Zeka:** Ollama entegrasyonu sayesinde, komutları doğal dil ile ("Bilgisayarı kapat", "Analiz yap") verebilirsiniz.
+* **🔒 Güvenli Protokol:** Sadece yetkili `User ID` (Siz) komut gönderebilir. Yabancıları "Yassah Hemşerim" diyerek engeller.
+* **📂 Modüler Yapı:** Yeni bir özellik mi lazım? Scripti klasöre atın, Ghost Operator onu anında tanır.
 
-## 🛠️ Kurulum
+## 🛠️ Kurulum Protokolü
 
-1.  **Projeyi İndir:**
+1.  **Depoyu Klonla:**
     ```bash
-    git clone [https://github.com/musabduman/Borsa-Yapay-Zeka-Asistani.git](https://github.com/musabduman/Borsa-Yapay-Zeka-Asistani.git)
+    git clone [https://github.com/musabduman/Ghost-Operator.git](https://github.com/musabduman/Ghost-Operator.git)
     ```
 
 2.  **Gereksinimleri Yükle:**
@@ -25,16 +25,19 @@ Sistemin yetenekleri, `scriptler` klasörüne atacağınız dosyalara bağlıdı
     pip install -r requirements.txt
     ```
 
-3.  **Ollama'yı Kur:**
-    Bilgisayarınızda [Ollama](https://ollama.com/) kurulu olmalı ve bir model (örn: `llama3` veya `gemma`) indirilmiş olmalıdır.
+3.  **Kimlik Doğrulama:**
+    `config_ornek.py` dosyasının adını `config.py` yapın ve bilgilerinizi girin:
+    * `TOKEN`: BotFather'dan alınan gizli anahtar.
+    * `MY_ID`: Telegram ID numaranız.
+    * `MODEL`: Kullanılacak LLM (Örn: `llama3`).
 
-4.  **Ayarları Yap:**
-    `telegram_control.py` dosyasını açın ve şu alanları doldurun:
-    * `model`: Kullandığınız Ollama modeli (örn: "llama3")
-    * `token`: BotFather'dan alınan Telegram Tokenı
-    * `my_id`: Sadece sizin kullanmanız için Telegram ID'niz
+4.  **Operasyonu Başlat:**
+    ```bash
+    python ghost_operator.py
+    ```
 
-## ▶️ Çalıştırma
-Sistemi başlatmak için:
-```bash
-python telegram_control.py
+## ⚠️ Yasal Uyarı
+Bu araç, geliştiricinin kendi cihazlarını yönetmesi için tasarlanmıştır. **Token bilgilerinizi asla paylaşmayın.** Oluşabilecek güvenlik açıklarından kullanıcı sorumludur.
+
+---
+*Developed by [Musab Duman](https://github.com/musabduman)*

@@ -1,0 +1,31 @@
+# --- Python Standartları ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Sanal Ortamlar (Yüklediğin kütüphaneler git'e gitmesin) ---
+venv/
+.venv/
+env/
+.env
+
+# --- Özel/Gizli Dosyalar (KESİNLİKLE GİTMEMELİ) ---
+config.py
+secrets.py
+*.env
+hisse_bilgi_ozel.py
+
+# --- VS Code ve Editör Ayarları ---
+.vscode/
+.idea/
+*.swp
+
+# --- İşletim Sistemi Dosyaları ---
+.DS_Store
+Thumbs.db
+
+# --- Log ve Veri Dosyaları (İsteğe bağlı) ---
+*.log
+*.csv
+*.xlsx
+*.json

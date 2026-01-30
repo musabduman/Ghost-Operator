@@ -9,13 +9,14 @@ import ollama
 import sys
 import io
 from ilk_zeka import borsa_muhasebe  # BU DOSYA AYNI KLASÖRDE OLMALI!
-
+import config
 # Encoding ayarı (Türkçe karakter sorunu olmasın diye)
 sys.stdout.reconfigure(encoding='utf-8')
 warnings.filterwarnings('ignore')
 
 # API KEY (Senin koddan aldım)
-GOOGLE_API_KEY = "AIzaSyDTdKjIRw59wrOYJjNY-wqUVyhyCyclnM8"
+GOOGLE_API_KEY = config.API
+
 client = genai.Client(api_key=GOOGLE_API_KEY)
 
 # --- YARDIMCI FONKSİYONLAR (Senin yazdıkların, aynen korudum) ---

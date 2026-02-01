@@ -1,0 +1,9 @@
+python-telegram-bot
+ollama
+requests
+pandas
+numpy
+yfinance
+duckduckgo-search
+google-genai
+scikit-learn

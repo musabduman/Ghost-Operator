@@ -4,7 +4,7 @@ import numpy as np
 
 class borsa_muhasebe:
     def __init__(self):
-        self.model=RandomForestClassifier(n_estimators=200, min_samples_split=10,random_state=42)
+        self.model=RandomForestClassifier(class_weight='balanced',max_depth=10,n_estimators=200, min_samples_split=10,random_state=42)
     
     def analiz_et(self,df):
         if df is None or df.empty:
@@ -27,10 +27,13 @@ class borsa_muhasebe:
         df['SMA_50']=df['Close']/df['Close'].rolling(window=50).mean()
         
         df['Momentum']=df['Close']/df['Close'].shift(10)
-        
+        df['RSI_Lag1']=df['RSI'].shift(1)
+        df['Getiri_Lag1']=df['Getiri'].shift(1)
+        df['Hacim_Lag1']=df['Hacim_degisimi'].shift(1)
+        df['SMA_Uzaklik'] = (df['Close'] - df['Close'].rolling(window=50).mean()) / df['Close'].rolling(window=50).mean()
         df.replace([np.inf,-np.inf], np.nan, inplace=True)
         
-        self.ozellikler=['Getiri','Hacim_degisimi','Oynaklık','RSI','SMA_50','Momentum']
+        self.ozellikler=['Getiri','Hacim_degisimi','Oynaklık','RSI','SMA_50','Momentum','RSI_Lag1', 'Getiri_Lag1', 'Hacim_Lag1', 'SMA_Uzaklik']
         
         df['Target']=(df['Close'].shift(-1)>df['Close']).astype(int)
         
@@ -40,10 +43,19 @@ class borsa_muhasebe:
         X=gecmis[self.ozellikler]
         Y=gecmis['Target']
 
-        spilt=int(len(X)*0.8)
+        if int(len(X))>25:
+            spilt=int(len(X)*0.8)
+        else:
+            spilt=int(len(X)*0.8)
         X_train,X_test=X.iloc[:spilt],X.iloc[spilt:]
         Y_train,Y_test=Y.iloc[:spilt],Y.iloc[spilt:]
 
+        self.model.fit(X_train,Y_train)
+        basarı_paunı=self.model.score(X_test,Y_test)
+        print(f"Oğlunun başarı puanı {basarı_paunı}")
+        from sklearn.metrics import classification_report
+        tahmiler=self.model.predict(X_test)
+        print("Detaylı karne:\n", classification_report(Y_test,tahmiler))
         self.model.fit(X,Y)
         if bugun.isnull().values.any():
             return {"yön": "HESAPLANAMADI (Eksik Veri)", "güven": 0}

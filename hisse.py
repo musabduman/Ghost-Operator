@@ -3,11 +3,9 @@ import yfinance as yf
 import pandas as pd
 from google import genai
 import warnings
-from ddgs import DDGS
+from duckduckgo_search import DDGS
 import numpy as np
-import ollama
 import sys
-import io
 from ilk_zeka import borsa_muhasebe  # BU DOSYA AYNI KLASÖRDE OLMALI!
 import config
 # Encoding ayarı (Türkçe karakter sorunu olmasın diye)
@@ -103,7 +101,8 @@ def calcu_pivot(df):
     df['S1'] = (2 * df['Pivot']) - df['High']
     return df
 
-def muhasebeci(df):
+def muhasebeci(hisse):
+    df_muhasebeci = hisse.history(period="4y")
     try:
         bot = borsa_muhasebe()
         sonuc = bot.analiz_et(df)
@@ -137,7 +136,7 @@ def gemini_yorumla(temel, sembol, df, haberler_listesi, ai_rapor):
 
     4. Aİ BOTU YARDIMI:
     {ai_rapor}
-    (bu rapor tamamen sayısal verilerle hesaplanmıştır bunU AYNEN YAZDIR ve yorumunda kullan!)
+    (bu rapor tamamen sayısal verilerle hesaplanmıştır bunu AYNEN YAZDIR ve yorumunda kullan!)
 
     KARAR MEKANİZMAN (Bu kurallara sadık kal):
     • RSI: <30 (Aşırı Ucuz/Al Fırsatı), >70 (Aşırı Pahalı/Sat Fırsatı), 30-70 (Nötr/Trendi Takip Et).
@@ -147,7 +146,7 @@ def gemini_yorumla(temel, sembol, df, haberler_listesi, ai_rapor):
     • BOLLINGER: Width (Bant Genişligi) düşüyorsa "SIKIŞMA" var (Patlama Yakın). Signal 1 ise yukarı, 0 ise yatay.
     • PIVOT: Fiyat > Pivot ise Hedef R1. Fiyat < Pivot ise Destek S1.
     • VOLATİLİTE: Yüksekse stop seviyesini biraz daha geniş tut, düşükse dar tut.
-
+    * ML TAHMİNİ: Bu sadece sayısal verilerle hesaplanan bir değerdir yükseliş veya düşüş tahmininde bulunur ve bunun yüzdelik ihtimalini söyler {ai_rapor}.
     GÖREVİN:
     Tüm verileri (Temel + Teknik + Haber) birleştir. Teknik veriler "AL" derken Haberler "KÖTÜ" ise güven skorunu düşür. Çelişkileri belirt.
 
@@ -214,7 +213,7 @@ if __name__ == "__main__":
         # 3. Hesaplamaları Yap
         df = teknik_analiz(df)
         temel = temel_veriler(hisse)
-        ai_rapor = muhasebeci(df)
+        ai_rapor = muhasebeci(hisse)
         haberler_listesi = haber_verileri(sembol)
         
         # 4. Yorumu Al (Gemini)

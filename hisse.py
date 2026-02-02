@@ -105,7 +105,7 @@ def muhasebeci(hisse):
     df_muhasebeci = hisse.history(period="4y")
     try:
         bot = borsa_muhasebe()
-        sonuc = bot.analiz_et(df)
+        sonuc = bot.analiz_et(df_muhasebeci)
         return f"AI Modeli: %{sonuc['güven']} ihtimalle {sonuc['yön']} bekliyor."
     except Exception as e:
         return "Muhasebe modülü hata verdi."

@@ -7,3 +7,5 @@ yfinance
 duckduckgo-search
 google-genai
 scikit-learn
+pyautogui
+pillow

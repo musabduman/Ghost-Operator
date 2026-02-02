@@ -43,10 +43,7 @@ class borsa_muhasebe:
         X=gecmis[self.ozellikler]
         Y=gecmis['Target']
 
-        if int(len(X))>25:
-            spilt=int(len(X)*0.8)
-        else:
-            spilt=int(len(X)*0.8)
+        spilt=int(len(X)*0.8)
         X_train,X_test=X.iloc[:spilt],X.iloc[spilt:]
         Y_train,Y_test=Y.iloc[:spilt],Y.iloc[spilt:]
 

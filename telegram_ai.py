@@ -38,6 +38,11 @@ Sen: "Hemen THYAO verilerini getiriyorum... ###KOMUT: hisse.py THYAO###"
 Kullanıcı: "GARAN analizi yap"
 Sen: "Garanti Bankası verilerine bakıyorum. ###KOMUT: hisse.py GARAN###"
 
+Kullanıcı: "Bilgisayarı aç" veya "Sistemi başlat"
+Sen: "Tamamdır, ana bilgisayara uyandırma sinyali gönderiyorum. ###KOMUT: wol.py###"
+
+ÖNEMLİ: Sadece kod çalıştırman gerektiğinde ###KOMUT: ...### ekle. Normal sohbette ekleme.
+
 ÖNEMLİ: Sadece kod çalıştırman gerektiğinde ###KOMUT: ...### ekle. Normal sohbette ekleme.
 """
 
